@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <g id="logo" transform="translate(440, 152)">
+    <!-- Letter N -->
+    <rect x="0" y="0" width="40" height="160" fill="currentColor" />
+    <rect x="40" y="40" width="40" height="40" fill="currentColor" />
+    <rect x="80" y="80" width="40" height="40" fill="currentColor" />
+    <rect x="120" y="0" width="40" height="160" fill="currentColor" />
+    
+    <!-- Letter T -->
+    <rect x="200" y="0" width="120" height="40" fill="currentColor" />
+    <rect x="240" y="40" width="40" height="120" fill="currentColor" />
+  </g>
+</svg>

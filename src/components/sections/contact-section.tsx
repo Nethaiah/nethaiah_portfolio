@@ -1,0 +1,64 @@
+import {
+  ArrowUpRightIcon,
+  CalendarDaysIcon,
+  MailIcon,
+  NotebookTextIcon,
+} from "lucide-react";
+import { SectionHeading } from "@/components/section-heading";
+
+const contactLinks = [
+  {
+    label: "Email",
+    value: "maestrojomar143@gmail.com",
+    href: "mailto:maestrojomar143@gmail.com",
+    icon: <MailIcon className="size-4" />,
+  },
+  {
+    label: "Let's Talk",
+    value: "Schedule a call",
+    href: "#contact",
+    icon: <CalendarDaysIcon className="size-4" />,
+  },
+  {
+    label: "Blog",
+    value: "Read my notes",
+    href: "#",
+    icon: <NotebookTextIcon className="size-4" />,
+  },
+  {
+    label: "GitHub",
+    value: "@Nethaiah",
+    href: "https://github.com/Nethaiah",
+    icon: "⌥",
+  },
+] as const;
+
+export function ContactSection() {
+  return (
+    <section id="contact" className="portfolio-col portfolio-section">
+      <SectionHeading title="Get In Touch" />
+      <div className="grid gap-3 sm:grid-cols-2">
+        {contactLinks.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
+          >
+            <span className="flex size-9 items-center justify-center border border-border bg-muted text-foreground">
+              {item.icon}
+            </span>
+            <div className="flex flex-1 flex-col gap-1">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
+                {item.label}
+              </p>
+              <p className="text-sm text-foreground transition-colors group-hover:text-primary">
+                {item.value}
+              </p>
+            </div>
+            <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
