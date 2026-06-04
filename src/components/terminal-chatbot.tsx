@@ -413,7 +413,7 @@ export function TerminalChatbot() {
           <>
             <div
               ref={scrollRef}
-              className="flex max-h-[22rem] min-h-[18rem] flex-col gap-3 overflow-y-auto bg-background/80 px-3 py-3 sm:max-h-[28rem]"
+              className="flex max-h-[14rem] min-h-[12rem] flex-col gap-3 overflow-y-auto bg-background/80 px-3 py-3 sm:min-h-[18rem] sm:max-h-[22rem] lg:max-h-[28rem]"
             >
               {messages.map((message) => (
                 <TerminalLines key={message.id} message={message} />
@@ -473,7 +473,9 @@ export function TerminalChatbot() {
                   }
                   aria-label="Terminal command"
                   autoComplete="off"
+                  enterKeyHint="send"
                   disabled={isPending}
+                  className="text-base sm:text-sm"
                 />
                 <InputGroupAddon align="inline-end">
                   <InputGroupButton

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BrandMark } from "@/components/brand-mark";
+import { MenuIcon, XIcon } from "lucide-react";
 
 const navLinks = [
   { href: "/#about", label: "about" },
@@ -16,6 +17,7 @@ const navLinks = [
 export function PortfolioNav() {
   // true when the hero brand section has scrolled out of the viewport
   const [heroOut, setHeroOut] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("hero-brand");
@@ -48,7 +50,8 @@ export function PortfolioNav() {
           <BrandMark className="block select-none h-5 w-auto" />
         </a>
 
-        <div className="flex items-center gap-6 text-sm font-medium">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -60,10 +63,37 @@ export function PortfolioNav() {
           ))}
         </div>
 
-        <div className="ml-auto flex items-center">
+        <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
+          
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Nav Overlay */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur border-b border-border/80 shadow-lg animate-in slide-in-from-top-2">
+          <div className="flex flex-col py-4 px-6 gap-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-foreground font-medium py-2 border-b border-border/40 capitalize"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

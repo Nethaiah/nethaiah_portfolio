@@ -20,6 +20,12 @@ export const metadata: Metadata = {
     "Full-stack developer focused on building high-quality web applications with AI integration. Based in Laguna, PH.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -155,7 +155,7 @@ export function ProjectsSection() {
                 <div className="proj-date mt-2">{project.date}</div>
               </div>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl sm:max-w-4xl w-[90vw] md:w-[80vw] max-h-[85vh] overflow-y-auto p-6 sm:p-8">
+            <DialogContent className="max-w-4xl sm:max-w-4xl w-[95vw] sm:w-[90vw] md:w-[80vw] max-h-[85vh] overflow-y-auto p-4 sm:p-8">
               <DialogHeader tabIndex={0} className="focus:outline-none">
                 <DialogTitle className="text-2xl font-bold">{project.name}</DialogTitle>
                 <DialogDescription className="text-muted-foreground mt-1">

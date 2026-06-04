@@ -9,7 +9,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ title, count, action }: SectionHeadingProps) {
   return (
     <div className="flex items-center gap-4">
-      <h2 className="text-2xl font-bold tracking-tight text-foreground">
+      <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
         {title}
       </h2>
       {typeof count === "number" ? (

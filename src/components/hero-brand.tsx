@@ -31,7 +31,7 @@ export function HeroBrand() {
   return (
     <div
       id="hero-brand"
-      className="relative flex min-h-[240px] w-full items-center justify-center overflow-hidden bg-background"
+      className="relative flex min-h-[180px] sm:min-h-[240px] w-full items-center justify-center overflow-hidden bg-background"
     >
       {/* DotField fills the whole hero, faded at top/bottom using mask-image */}
       <div
@@ -60,7 +60,7 @@ export function HeroBrand() {
       {/* Brand SVG centered with Magnet effect */}
       <div className="relative z-2 text-foreground">
         <Magnet padding={120} magnetStrength={3} wrapperClassName="block">
-          <BrandMark className="w-[160px] h-auto" />
+          <BrandMark className="w-[120px] sm:w-[160px] h-auto" />
         </Magnet>
       </div>
     </div>

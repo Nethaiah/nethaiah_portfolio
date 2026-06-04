@@ -176,7 +176,7 @@ export function CertificationsSection() {
           if (!open) setSelectedCert(null);
         }}
       >
-        <DialogContent className="sm:max-w-3xl max-h-[90vh]">
+        <DialogContent className="w-[95vw] sm:max-w-3xl max-h-[90vh] p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle>{selectedCert?.name}</DialogTitle>
             <DialogDescription>
@@ -188,7 +188,9 @@ export function CertificationsSection() {
               <Image
                 src={selectedCert.file}
                 alt={selectedCert.name}
-                className="w-full rounded-sm"
+                width={1200}
+                height={850}
+                className="w-full h-auto rounded-sm"
               />
             )}
           </div>

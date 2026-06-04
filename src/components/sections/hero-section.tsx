@@ -39,7 +39,7 @@ const socialLinks = [
 
 export function HeroSection() {
   return (
-    <section id="about" className="portfolio-col pt-8 pb-14">
+    <section id="about" className="portfolio-col pt-6 pb-12 sm:pt-8 sm:pb-14">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
           <ProfileAvatar />
