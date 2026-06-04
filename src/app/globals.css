@@ -361,6 +361,7 @@
   }
 
   .exp-bul {
+    list-style-type: disc;
     padding-inline-start: 1rem;
     font-size: 0.78rem;
     color: var(--foreground);

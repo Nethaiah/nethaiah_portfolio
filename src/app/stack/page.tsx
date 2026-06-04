@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { PortfolioNav } from "@/components/portfolio-nav";
 import { FluidGradientText } from "@/components/fluid-gradient-text";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { SectionHeading } from "@/components/section-heading";
 
 export const metadata: Metadata = {
   title: "Tech Stack | Nethaiah",
@@ -51,7 +51,7 @@ const stackCategories = [
   },
   {
     title: "Auth & Security",
-    items: ["Better Auth", "Arcjet"],
+    items: ["Better Auth", "Clerk", "OAuth", "Arcjet"],
   },
   {
     title: "Infrastructure & Deployment",
@@ -63,16 +63,7 @@ const stackCategories = [
   },
 ] as const;
 
-function SectionHeading({ title }: { title: string }) {
-  return (
-    <div className="flex items-center gap-4 mb-4">
-      <h2 className="text-2xl font-bold tracking-tight text-foreground">
-        {title}
-      </h2>
-      <div className="h-px flex-1 bg-linear-to-r from-border/50 to-transparent" />
-    </div>
-  );
-}
+
 
 export default function StackPage() {
   return (
@@ -101,10 +92,8 @@ export default function StackPage() {
           </div>
         </section>
 
-
-
         {/* Stack categories */}
-        {stackCategories.map((category, catIndex) => (
+        {stackCategories.map((category) => (
           <div key={category.title}>
             <section className="portfolio-col portfolio-section">
               <SectionHeading title={category.title} />
@@ -121,11 +110,8 @@ export default function StackPage() {
                 ))}
               </div>
             </section>
-            {catIndex < stackCategories.length - 1 && <div className="my-8" />}
           </div>
         ))}
-
-
 
         <footer className="overflow-hidden border-t border-border/80 bg-background">
           <div className="portfolio-col flex flex-col gap-4 py-6">

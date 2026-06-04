@@ -2,7 +2,6 @@ import {
   ArrowUpRightIcon,
   CalendarDaysIcon,
   MailIcon,
-  NotebookTextIcon,
 } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -20,16 +19,22 @@ const contactLinks = [
     icon: <CalendarDaysIcon className="size-4" />,
   },
   {
-    label: "Blog",
-    value: "Read my notes",
-    href: "#",
-    icon: <NotebookTextIcon className="size-4" />,
-  },
-  {
     label: "GitHub",
     value: "@Nethaiah",
     href: "https://github.com/Nethaiah",
     icon: "⌥",
+  },
+  {
+    label: "LinkedIn",
+    value: "Maestro Jomar D.",
+    href: "https://www.linkedin.com/in/maestro-jomar-d-134876330/",
+    icon: "in",
+  },
+  {
+    label: "X",
+    value: "@Nethaiah_",
+    href: "https://x.com/Nethaiah_",
+    icon: "𝕏",
   },
 ] as const;
 

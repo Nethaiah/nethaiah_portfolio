@@ -29,59 +29,51 @@ interface Company {
 
 const experience: readonly Company[] = [
   {
-    company: "Standard Chartered",
-    live: true,
+    company: "Laguna Management Information Systems Office (MISO)",
     roles: [
       {
-        title: "AI Engineer",
-        type: "Full-time",
-        dates: "01.2025 → ∞",
-        duration: "Current",
+        title: "IT Intern",
+        type: "Internship",
+        dates: "Feb 2026 – April 2026",
+        duration: "3 mos",
         bullets: [
-          "Build AI-powered enterprise banking solutions",
-          "Lead GenAI and LLM workflow integration into production",
+          "Accelerated real-time OMR auto-capture speeds, by engineering an optimized OpenCV pipeline that bypasses expensive NV21-to-Bitmap frame conversions.",
+          "Achieved at least 94%+ bubble detection accuracy across 30–60 item exam formats by calculating pixel density and applying solidity, darkness, and fill ratio filters to reject false positives.",
+          "Delivered a production-ready APK to Calangay Integrated High School teachers, earning a Certificate of Recognition for successful field deployment.",
         ],
-        tags: ["Python", "LangChain", "AWS"],
-      },
-      {
-        title: "AI Ops Engineer",
-        type: "Full-time",
-        dates: "01.2025 → ∞",
-        duration: "Current",
-        bullets: [],
-        tags: ["GenAI", "MLOps"],
+        tags: ["Java", "OpenCV", "SQLite", "Android Studio"],
       },
     ],
   },
   {
-    company: "Core Technology, Cambridge",
+    company: "Ship or Be Shipped Hackathon",
     roles: [
       {
-        title: "Senior Full-Stack Developer",
-        type: "Full-time",
-        dates: "03.2023 – 12.2024",
-        duration: "1y 9m",
+        title: "Developer (MedAssist)",
+        type: "Hackathon",
+        dates: "Dec 2025",
+        duration: "24h",
         bullets: [
-          "Built scalable applications for 50K+ daily users",
-          "Architected microservices on AWS",
+          "Engineered a real-time safety validation layer using the OpenFDA API to cross-reference AI outputs against federal drug databases, automatically flagging contraindications and ensuring clinical compliance.",
+          "Developed an AI-powered treatment planner during a 24-hour coding sprint, parsing patient intake data into structured JSON recommendations via LLM.",
         ],
-        tags: ["React", "Node.js", "PostgreSQL"],
+        tags: ["Typescript", "Next.js", "Supabase", "OpenFDA API", "Google Gemini 3.0 pro", "TailwindCSS", "Shadcn/UI"],
       },
     ],
   },
   {
-    company: "PocketDevs",
+    company: "Freelance",
     roles: [
       {
-        title: "Software Engineering Lead",
-        type: "Full-time",
-        dates: "01.2021 – 02.2023",
-        duration: "2y 1m",
+        title: "Full-Stack Developer",
+        type: "Freelance",
+        dates: "July 2025 – Aug 2025",
+        duration: "2 mos",
         bullets: [
-          "Led team of 8 building SaaS products for SMEs",
-          "Established CI/CD pipelines and code review culture",
+          "Architected a secure role-based authentication system using Next.js and PostgreSQL for administrators, assessors, and taxpayers.",
+          "Implemented schema-based validation with Zod, protecting critical tax assessment records from invalid submissions.",
         ],
-        tags: ["Vue.js", "Laravel", "Docker"],
+        tags: ["Typescript", "Next.js", "PostgreSQL", "Prisma", "TailwindCSS", "Material UI"],
       },
     ],
   },
@@ -139,7 +131,7 @@ function ExperienceBlock({ company }: { company: Company }) {
               <span className="exp-dur">{role.duration}</span>
             </p>
             {role.bullets.length > 0 ? (
-              <ul className="exp-bul">
+              <ul className="exp-bul list-outside list-disc pl-5">
                 {role.bullets.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}

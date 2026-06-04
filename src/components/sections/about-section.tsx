@@ -1,9 +1,7 @@
 import { SectionHeading } from "@/components/section-heading";
 
 const aboutParagraphs = [
-  "I'm a full-stack software engineer specializing in JavaScript, TypeScript, Python, and PHP — building modern web applications and AI-powered products across the full stack, with a focus on quality, performance, and real-world impact.",
-  "I've gained most of my experience through building a variety of experimental projects, ranging from full-stack web apps to REST APIs. I'm always eager to learn and improve—whether that's by staying up to date with the latest tech news.",
-  "Lately I've been diving deeper into artificial intelligence — integrating LLM-powered features, vector search, and generative AI workflows into modern applications to build smarter, more useful software.",
+  "Detail-oriented Full-Stack Developer with a strong foundation in software engineering and AI technologies. Experienced in building secure, scalable applications using Next.js and PostgreSQL, with hands-on expertise across various frameworks and tools. Proven ability to deliver production-ready solutions that solve real-world problems and streamline operations.",
 ] as const;
 
 export function AboutSection() {

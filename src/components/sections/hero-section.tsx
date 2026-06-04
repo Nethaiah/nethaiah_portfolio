@@ -35,11 +35,6 @@ const socialLinks = [
     href: "https://www.linkedin.com/in/maestro-jomar-d-134876330/",
     icon: "in",
   },
-  {
-    label: "Discord",
-    href: "https://discord.com",
-    icon: "◈",
-  },
 ] as const;
 
 export function HeroSection() {
@@ -64,7 +59,7 @@ export function HeroSection() {
             </h1>
             <p className="font-mono text-[0.75rem] uppercase tracking-[0.16em] text-muted-foreground">
               <span className="text-primary">Full-Stack</span> · Web Developer ·{" "}
-              <span className="text-primary">AI Integration</span>
+              <span className="text-primary">AI</span>
             </p>
           </div>
         </div>
