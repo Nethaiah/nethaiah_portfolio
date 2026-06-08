@@ -9,7 +9,7 @@ export function SiteFooter() {
         </p>
       </div>
 
-      <div className="mx-auto h-48 max-w-6xl px-4 text-foreground sm:h-56">
+      <div className="mx-auto hidden max-w-6xl px-4 text-foreground md:block md:h-56">
         <FluidGradientText text="Nethaiah" svgViewBoxHeight={220} />
       </div>
     </footer>

@@ -97,18 +97,6 @@ const certifications: Certificate[] = [
     year: "2024",
     file: "/certificates/Jomar D. Maestro Immutable Backend Web Development with Internet Computer june 25 Certificate.jpg",
   },
-  {
-    name: "AI-Innovative Week (June 18)",
-    issuer: "DICT Rizal",
-    year: "2024",
-    file: "/certificates/Jomar Maestro DICT Rizal Ai-Innovative week june 18 Certificate.jpg",
-  },
-  {
-    name: "AI-Innovative Week (June 20)",
-    issuer: "DICT Rizal",
-    year: "2024",
-    file: "/certificates/Jomar Maestro DICT Rizal Ai-Innovative week june 20 Certificate.jpg",
-  },
 ];
 
 export function CertificationsSection() {

@@ -47,6 +47,7 @@ const stackCategories = [
       "Hugging Face",
       "Claude Code",
       "OpenCode",
+      "Skills",
     ],
   },
   {
@@ -55,7 +56,7 @@ const stackCategories = [
   },
   {
     title: "Infrastructure & Deployment",
-    items: ["Git/GitHub", "Vercel", "Railway", "GCP", "XAMPP", "Laravel Herd"],
+    items: ["Git/GitHub", "Vercel", "Railway", "Google Cloud Platform", "XAMPP", "Laravel Herd"],
   },
   {
     title: "Dev Tools & Workflow",

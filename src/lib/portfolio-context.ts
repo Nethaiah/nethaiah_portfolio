@@ -146,6 +146,40 @@ export const portfolioContext = {
   },
   projects: [
     {
+      name: "Nethaiah Portfolio",
+      summary: "Personal developer portfolio with a terminal-style assistant.",
+      role: "Full Stack Developer",
+      date: "2026",
+      url: "https://www.nethaiah.online",
+      github: "https://github.com/Nethaiah/nethaiah_portfolio.git",
+      stack: [
+        "Next.js",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS",
+        "Shadcn/UI",
+        "Base UI",
+        "Supabase",
+        "Resend",
+        "OpenRouter",
+        "Motion",
+      ],
+      overview:
+        "Personal developer site for presenting projects, technical experience, GitHub activity, certifications, and direct contact paths in a focused CLI-inspired interface.",
+      highlights: [
+        "Built structured sections for profile details, projects, experience, certifications, tech stack, GitHub activity, and contact links.",
+        "Added a CLI-style portfolio assistant with local command responses and optional server-side OpenRouter integration.",
+        "Implemented a responsive contact modal with schema validation, Supabase persistence, Resend email notifications, and theme-matched toast feedback.",
+        "Integrated dark-first shadcn/ui and Base UI components with custom portfolio styling and motion effects.",
+        "Configured the portfolio for production use at nethaiah.online.",
+      ],
+      outcomes: [
+        "Built a single source of truth for portfolio facts so assistant answers stay consistent.",
+        "Aligned the contact flow from UI validation through API handling and database storage.",
+        "Refined shadcn component styling for calendar, select, dialog, input, and sonner behavior while preserving the portfolio theme.",
+      ],
+    },
+    {
       name: "Doculens (Laguna University Semantic Theses Search)",
       summary: "AI-powered document management and semantic search platform.",
       role: "Full Stack Developer",

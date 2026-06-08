@@ -9,8 +9,8 @@ const stackItems = [
   "React",
   "Next.js",
   "Tailwind CSS",
+  "Shadcn/UI",
   "Node.js",
-  "Hono",
   "FastAPI",
   "Laravel",
   "PostgreSQL",
@@ -19,9 +19,8 @@ const stackItems = [
   "Better Auth",
   "Vercel",
   "OpenRouter",
-  "GitHub",
-  "Biome",
-  "ESLint",
+  "Git/GitHub",
+  "Google Cloud Platform",
 ] as const;
 
 export function StackSection() {

@@ -13,6 +13,28 @@ import {
 
 const projects = [
   {
+    name: "Nethaiah Portfolio",
+    shortDesc: "Personal developer portfolio with terminal-style assistant",
+    url: "https://www.nethaiah.online",
+    github: "https://github.com/Nethaiah/nethaiah_portfolio.git",
+    tags: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Shadcn/UI", "Supabase", "Resend", "OpenRouter"],
+    date: "2026",
+    role: "Full Stack Developer",
+    overview: "Nethaiah Portfolio is my personal developer site for presenting projects, technical experience, GitHub activity, certifications, and direct contact paths in a focused CLI-inspired interface. The project combines a responsive portfolio layout with an interactive terminal assistant and a contact workflow backed by server-side validation, Supabase storage, and Resend email delivery.",
+    bullets: [
+      "Portfolio Sections: Built structured sections for hero profile details, recent projects, experience, certifications, tech stack, GitHub activity, and contact links.",
+      "Terminal Assistant: Added a CLI-style portfolio assistant with local command responses and optional server-side OpenRouter integration.",
+      "Contact Workflow: Implemented a responsive contact modal with schema validation, Supabase persistence, and Resend email notifications.",
+      "Theme System: Integrated dark-first shadcn/ui and Base UI components with custom portfolio styling, motion effects, and responsive layout behavior.",
+      "Deployment Ready: Configured the project as a production Next.js portfolio hosted at the custom domain nethaiah.online."
+    ],
+    accomplishments: [
+      "Built a single source of truth for portfolio facts so the assistant can answer consistently about skills, projects, experience, and contact paths.",
+      "Improved the contact flow to match the current form schema from UI validation through API handling and database storage.",
+      "Refined shadcn component styling for calendar, select, dialog, input, and sonner behavior while preserving the portfolio theme."
+    ]
+  },
+  {
     name: "Doculens (Laguna University Semantic Theses Search)",
     shortDesc: "AI-Powered Document Management & Search Platform",
     url: "https://doculens-rho.vercel.app/",

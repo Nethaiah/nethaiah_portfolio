@@ -84,7 +84,7 @@ export function ProfileAvatar() {
   const imgSrc = currentTheme === "light" ? "/light_profile.png" : "/dark_profile.png";
 
   return (
-    <div className="relative shrink-0">
+    <div className="relative shrink-0 w-fit">
       {/* Avatar container */}
       <div className="relative size-20 overflow-hidden border border-border bg-card">
 
