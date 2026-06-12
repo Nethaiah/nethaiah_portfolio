@@ -59,7 +59,7 @@ function Carousel({
     plugins
   )
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-  const [canScrollNext, setCanScrollNext] = React.useState(true)
+  const [canScrollNext, setCanScrollNext] = React.useState(false)
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
@@ -193,7 +193,6 @@ function CarouselPrevious({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
-      suppressHydrationWarning
       {...props}
     >
       <ChevronLeftIcon />
@@ -224,7 +223,6 @@ function CarouselNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
-      suppressHydrationWarning
       {...props}
     >
       <ChevronRightIcon />

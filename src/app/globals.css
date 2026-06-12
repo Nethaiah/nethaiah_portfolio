@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@source "../../node_modules/shadcn";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -122,7 +124,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply overflow-x-hidden bg-background text-foreground;
   }
   html {
     @apply font-sans;
