@@ -1,5 +1,6 @@
 import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PortfolioNav } from "@/components/portfolio-nav";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { Badge } from "@/components/ui/badge";
@@ -99,13 +100,13 @@ export default function StackPage() {
         {/* Page header */}
         <section className="portfolio-col py-10">
           <div className="flex flex-col gap-4">
-            <a
+            <Link
               href="/"
               className="inline-flex w-fit items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-primary"
             >
               <ArrowLeftIcon className="size-3" />
               Back to home
-            </a>
+            </Link>
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold tracking-[-0.03em] text-foreground sm:text-3xl">
                 Tech Stack

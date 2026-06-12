@@ -18,6 +18,7 @@ import {
   ContributionGraphLegend,
   ContributionGraphTotalCount,
 } from "@/components/contribution-graph";
+import Link from "next/link";
 
 export function GitHubContributions({
   contributions,
@@ -64,14 +65,14 @@ export function GitHubContributions({
           {({ totalCount, year }) => (
             <div className="text-muted-foreground">
               {totalCount.toLocaleString("en")} contributions in {year} on{" "}
-              <a
+              <Link
                 className="text-foreground link-underline"
                 href={githubProfileUrl}
                 target="_blank"
                 rel="noopener"
               >
                 GitHub
-              </a>
+              </Link>
               .
             </div>
           )}

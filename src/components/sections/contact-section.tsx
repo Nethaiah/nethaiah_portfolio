@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowUpRightIcon,
   DownloadIcon,
@@ -20,7 +21,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-
 const RESUME_PDF = "/Resume_Jomar_Maestro_v3.pdf";
 const RESUME_IMG = "/Resume_Jomar_Maestro_v3.jpg";
 
@@ -32,7 +32,7 @@ export function ContactSection() {
       <SectionHeading title="Get In Touch" />
       <div className="grid gap-3 sm:grid-cols-2">
         {/* Email */}
-        <a
+        <Link
           href="mailto:maestrojomar143@gmail.com"
           className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
         >
@@ -48,7 +48,7 @@ export function ContactSection() {
             </p>
           </div>
           <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-        </a>
+        </Link>
 
         {/* Let's Talk */}
         <LetsTalkModal />
@@ -74,7 +74,7 @@ export function ContactSection() {
         </button>
 
         {/* LinkedIn */}
-        <a
+        <Link
           href="https://www.linkedin.com/in/maestro-jomar-d-134876330/"
           className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
         >
@@ -90,10 +90,10 @@ export function ContactSection() {
             </p>
           </div>
           <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-        </a>
+        </Link>
 
         {/* GitHub */}
-        <a
+        <Link
           href="https://github.com/Nethaiah"
           className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
         >
@@ -109,10 +109,10 @@ export function ContactSection() {
             </p>
           </div>
           <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-        </a>
+        </Link>
 
         {/* X / Twitter */}
-        <a
+        <Link
           href="https://x.com/Nethaiah_"
           className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
         >
@@ -128,7 +128,7 @@ export function ContactSection() {
             </p>
           </div>
           <ArrowUpRightIcon className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-        </a>
+        </Link>
       </div>
 
       {/* Resume Dialog */}
@@ -160,7 +160,7 @@ export function ContactSection() {
               size="sm"
               nativeButton={false}
               render={
-                <a href={RESUME_PDF} download="Resume_Jomar_Maestro.pdf" />
+                <Link href={RESUME_PDF} download="Resume_Jomar_Maestro.pdf" />
               }
             >
               <DownloadIcon />

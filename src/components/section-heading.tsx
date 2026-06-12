@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 interface SectionHeadingProps {
@@ -17,12 +18,12 @@ export function SectionHeading({ title, count, action }: SectionHeadingProps) {
       ) : null}
       <div className="h-px flex-1 bg-linear-to-r from-border/50 to-transparent" />
       {action ? (
-        <a
+        <Link
           className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           href={action.href}
         >
           {action.label} →
-        </a>
+        </Link>
       ) : null}
     </div>
   );

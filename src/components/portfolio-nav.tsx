@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -36,7 +37,7 @@ export function PortfolioNav() {
     <nav className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur">
       <div className="portfolio-col flex h-14 items-center">
         {/* Brand logo — hidden by default, appears when hero scrolls out */}
-        <a
+        <Link
           href="/"
           aria-label="Go to home"
           className={cn(
@@ -48,18 +49,18 @@ export function PortfolioNav() {
           tabIndex={heroOut ? 0 : -1}
         >
           <BrandMark className="block select-none h-5 w-auto" />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-muted-foreground transition-colors hover:text-foreground capitalize"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -82,14 +83,14 @@ export function PortfolioNav() {
         <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur border-b border-border/80 shadow-lg animate-in slide-in-from-top-2">
           <div className="flex flex-col py-4 px-6 gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-foreground font-medium py-2 border-b border-border/40 capitalize"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

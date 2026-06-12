@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRightIcon, DownloadIcon } from "lucide-react";
 import { LiveTime } from "@/components/portfolio-widgets";
 import { ProfileAvatar } from "@/components/profile-avatar";
@@ -102,12 +103,12 @@ export function HeroSection() {
                 {item.label}
               </span>
               {item.href ? (
-                <a
+                <Link
                   href={item.href}
                   className="text-sm text-foreground transition-colors hover:text-primary"
                 >
                   {item.value}
-                </a>
+                </Link>
               ) : (
                 <span
                   className={cn(
@@ -137,7 +138,7 @@ export function HeroSection() {
           {/* First row: first 3 links */}
           <div className="grid gap-2 sm:grid-cols-3">
             {socialLinks.slice(0, 3).map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 target="_blank"
@@ -149,13 +150,13 @@ export function HeroSection() {
                 </span>
                 <span>{link.label}</span>
                 <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </a>
+              </Link>
             ))}
           </div>
           {/* Second row: last link centered */}
           <div className="flex justify-center">
             {socialLinks.slice(3).map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 target="_blank"
@@ -167,7 +168,7 @@ export function HeroSection() {
                 </span>
                 <span>{link.label}</span>
                 <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -202,7 +203,7 @@ export function HeroSection() {
               size="sm"
               nativeButton={false}
               render={
-                <a href={RESUME_PDF} download="Resume_Jomar_Maestro.pdf" />
+                <Link href={RESUME_PDF} download="Resume_Jomar_Maestro.pdf" />
               }
             >
               <DownloadIcon />

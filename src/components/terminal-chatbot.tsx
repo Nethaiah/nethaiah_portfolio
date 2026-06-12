@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   BotIcon,
   CornerDownLeftIcon,
@@ -9,7 +10,10 @@ import {
   XIcon,
 } from "lucide-react";
 import * as React from "react";
+import { Controller, type Resolver, useForm } from "react-hook-form";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
@@ -33,6 +37,19 @@ type TerminalCommand = {
   command: string;
   description: string;
 };
+
+const terminalFormSchema = z.object({
+  command: z
+    .string()
+    .trim()
+    .min(1, "Enter a command or question.")
+    .max(1000, "Command must be 1000 characters or fewer."),
+});
+
+type TerminalFormValues = z.infer<typeof terminalFormSchema>;
+const resolveTerminalForm = zodResolver as unknown as (
+  schema: typeof terminalFormSchema,
+) => Resolver<TerminalFormValues>;
 
 const terminalCommands: TerminalCommand[] = [
   { command: "/help", description: "Show command guide" },
@@ -292,14 +309,21 @@ function TerminalLines({ message }: { message: TerminalMessage }) {
 export function TerminalChatbot() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isMinimized, setIsMinimized] = React.useState(false);
-  const [input, setInput] = React.useState("");
   const [isPending, setIsPending] = React.useState(false);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = React.useState(0);
   const [messages, setMessages] =
     React.useState<TerminalMessage[]>(initialMessages);
+  const form = useForm<TerminalFormValues>({
+    resolver: resolveTerminalForm(terminalFormSchema),
+    defaultValues: {
+      command: "",
+    },
+    mode: "onSubmit",
+  });
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const nextId = React.useRef(initialMessages.length + 1);
+  const input = form.watch("command");
   const trimmedInput = input.trim().toLowerCase();
   const commandSuggestions = React.useMemo(() => {
     if (!trimmedInput.startsWith("/")) {
@@ -343,7 +367,10 @@ export function TerminalChatbot() {
   }
 
   function applySuggestion(command: string) {
-    setInput(command);
+    form.setValue("command", command, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
     setActiveSuggestionIndex(0);
     inputRef.current?.focus();
   }
@@ -377,20 +404,18 @@ export function TerminalChatbot() {
 
     if (event.key === "Escape") {
       event.preventDefault();
-      setInput("");
+      form.reset({ command: "" });
     }
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit(values: TerminalFormValues) {
+    const command = values.command.trim();
 
-    const command = input.trim();
-
-    if (!command || isPending) {
+    if (isPending) {
       return;
     }
 
-    setInput("");
+    form.reset({ command: "" });
     appendMessage("user", [command]);
 
     const reply = getTerminalReply(command);
@@ -509,8 +534,9 @@ export function TerminalChatbot() {
             </div>
 
             <form
-              onSubmit={handleSubmit}
+              onSubmit={form.handleSubmit(handleSubmit)}
               className="border-border border-t p-2"
+              noValidate
             >
               {showCommandSuggestions ? (
                 <div
@@ -545,37 +571,55 @@ export function TerminalChatbot() {
                   ))}
                 </div>
               ) : null}
-              <InputGroup className="h-9 bg-background">
-                <InputGroupInput
-                  ref={inputRef}
-                  value={input}
-                  onChange={(event) => {
-                    setInput(event.target.value);
-                    setActiveSuggestionIndex(0);
-                  }}
-                  onKeyDown={handleInputKeyDown}
-                  placeholder={
-                    isPending
-                      ? "Waiting for portfolio assistant..."
-                      : "Ask about skills, projects, contact..."
-                  }
-                  aria-label="Terminal command"
-                  autoComplete="off"
-                  enterKeyHint="send"
-                  disabled={isPending}
-                  className="text-base sm:text-sm"
-                />
-                <InputGroupAddon align="inline-end">
-                  <InputGroupButton
-                    type="submit"
-                    size="icon-xs"
-                    aria-label="Send command"
-                    disabled={isPending}
-                  >
-                    <CornerDownLeftIcon aria-hidden="true" />
-                  </InputGroupButton>
-                </InputGroupAddon>
-              </InputGroup>
+              <Controller
+                name="command"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={field.name} className="sr-only">
+                      Terminal command
+                    </FieldLabel>
+                    <InputGroup className="h-9 bg-background">
+                      <InputGroupInput
+                        {...field}
+                        ref={(node) => {
+                          field.ref(node);
+                          inputRef.current = node;
+                        }}
+                        id={field.name}
+                        onChange={(event) => {
+                          field.onChange(event);
+                          setActiveSuggestionIndex(0);
+                        }}
+                        onKeyDown={handleInputKeyDown}
+                        placeholder={
+                          isPending
+                            ? "Waiting for portfolio assistant..."
+                            : "Ask about skills, projects, contact..."
+                        }
+                        aria-invalid={fieldState.invalid}
+                        autoComplete="off"
+                        enterKeyHint="send"
+                        disabled={isPending}
+                        className="text-base sm:text-sm"
+                      />
+                      <InputGroupAddon align="inline-end">
+                        <InputGroupButton
+                          type="submit"
+                          size="icon-xs"
+                          aria-label="Send command"
+                          disabled={isPending}
+                        >
+                          <CornerDownLeftIcon aria-hidden="true" />
+                        </InputGroupButton>
+                      </InputGroupAddon>
+                    </InputGroup>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
             </form>
           </>
         ) : null}

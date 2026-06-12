@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/section-heading";
 import {
@@ -222,14 +223,14 @@ export function ProjectsSection() {
 
                 <div className="flex items-center gap-4 mt-2">
                   {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                    <Link href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
                       Live Demo ↗
-                    </a>
+                    </Link>
                   )}
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                    <Link href={project.github} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
                       GitHub Repository ↗
-                    </a>
+                    </Link>
                   )}
                 </div>
               </div>
