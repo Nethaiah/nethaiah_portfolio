@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { PortfolioNav } from "@/components/portfolio-nav";
-import { FluidGradientText } from "@/components/fluid-gradient-text";
+import { SiteFooter } from "@/components/sections/site-footer";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -22,7 +22,15 @@ const stackCategories = [
   },
   {
     title: "Backend & APIs",
-    items: ["Node.js", "Hono", "FastAPI", "Laravel", "Django", "REST API", "Zod"],
+    items: [
+      "Node.js",
+      "Hono",
+      "FastAPI",
+      "Laravel",
+      "Django",
+      "REST API",
+      "Zod",
+    ],
   },
   {
     title: "Databases & ORM",
@@ -56,15 +64,31 @@ const stackCategories = [
   },
   {
     title: "Infrastructure & Deployment",
-    items: ["Git/GitHub", "Vercel", "Railway", "Google Cloud Platform", "XAMPP", "Laravel Herd"],
+    items: [
+      "Git/GitHub",
+      "Vercel",
+      "Railway",
+      "Google Cloud Platform",
+      "XAMPP",
+      "Laravel Herd",
+    ],
   },
   {
     title: "Dev Tools & Workflow",
-    items: ["npm", "pnpm", "nuqs", "Resend", "Postman", "HTTPie", "TablePlus", "Agile", "Biome", "ESLint"],
+    items: [
+      "npm",
+      "pnpm",
+      "nuqs",
+      "Resend",
+      "Postman",
+      "HTTPie",
+      "TablePlus",
+      "Agile",
+      "Biome",
+      "ESLint",
+    ],
   },
 ] as const;
-
-
 
 export default function StackPage() {
   return (
@@ -114,43 +138,7 @@ export default function StackPage() {
           </div>
         ))}
 
-        <footer className="overflow-hidden border-t border-border/80 bg-background">
-          <div className="portfolio-col flex flex-col gap-4 py-6">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
-              <a
-                href="https://github.com/Nethaiah"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-primary"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/maestro-jomar-d-134876330/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-primary"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://x.com/Nethaiah_"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-primary"
-              >
-                X
-              </a>
-            </div>
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
-              © 2026 Jomar Maestro. All rights reserved.
-            </p>
-          </div>
-
-          <div className="mx-auto h-48 max-w-6xl px-4 text-foreground sm:h-56">
-            <FluidGradientText text="Nethaiah" svgViewBoxHeight={220} />
-          </div>
-        </footer>
+        <SiteFooter />
       </main>
     </>
   );

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#000000"/>
+  <g transform="translate(40, 120)">
+    <!-- Letter N -->
+    <rect x="0"   y="0"  width="40" height="160" fill="#ffffff"/>
+    <rect x="40"  y="40" width="40" height="40"  fill="#ffffff"/>
+    <rect x="80"  y="80" width="40" height="40"  fill="#ffffff"/>
+    <rect x="120" y="0"  width="40" height="160" fill="#ffffff"/>
+    <!-- Letter T -->
+    <rect x="200" y="0"  width="120" height="40"  fill="#ffffff"/>
+    <rect x="240" y="40" width="40"  height="120" fill="#ffffff"/>
+  </g>
+</svg>

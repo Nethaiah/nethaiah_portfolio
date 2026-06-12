@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nethaiah | Jomar Maestro",
+  title: "Nethaiah - Fullstack Developer",
   description:
-    "Full-stack developer focused on building high-quality web applications with AI integration. Based in Laguna, PH.",
+    "Full-stack developer focused on building high-quality web applications with AI integration."
 };
 
 export const viewport = {

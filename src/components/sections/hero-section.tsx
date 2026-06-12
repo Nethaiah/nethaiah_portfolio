@@ -1,6 +1,19 @@
-import { ArrowUpRightIcon } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowUpRightIcon, DownloadIcon } from "lucide-react";
 import { LiveTime } from "@/components/portfolio-widgets";
 import { ProfileAvatar } from "@/components/profile-avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 const profileMeta: {
@@ -8,22 +21,23 @@ const profileMeta: {
   value: string;
   href?: string;
   accent?: boolean;
+  action?: "resume";
 }[] = [
-  { label: "location", value: "Laguna, PH" },
+  { label: "status", value: "open to work", accent: true },
   {
     label: "email",
     value: "maestrojomar143@gmail.com",
     href: "mailto:maestrojomar143@gmail.com",
   },
-  { label: "status", value: "open to work", accent: true },
-  { label: "pronouns", value: "he/him" },
+  { label: "resume", value: "View Resume", action: "resume" },
+  { label: "location", value: "Laguna, PH" },
 ];
 
 const socialLinks = [
   {
-    label: "X / Twitter",
-    href: "https://x.com/Nethaiah_",
-    icon: "𝕏",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/maestro-jomar-d-134876330/",
+    icon: "in",
   },
   {
     label: "GitHub",
@@ -31,13 +45,18 @@ const socialLinks = [
     icon: "⌥",
   },
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/maestro-jomar-d-134876330/",
-    icon: "in",
+    label: "X / Twitter",
+    href: "https://x.com/Nethaiah_",
+    icon: "𝕏",
   },
 ] as const;
 
+const RESUME_PDF = "/Resume_Jomar_Maestro_v3.pdf";
+const RESUME_IMG = "/Resume_Jomar_Maestro_v3.jpg";
+
 export function HeroSection() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <section id="about" className="portfolio-col pt-6 pb-12 sm:pt-8 sm:pb-14">
       <div className="flex flex-col gap-8">
@@ -64,15 +83,20 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="grid overflow-hidden border border-border bg-card sm:grid-cols-2">
-          {profileMeta.map((item, index) => (
+        <div className="grid gap-2 sm:grid-cols-2">
+          {profileMeta.map((item) => (
             <div
               key={item.label}
               className={cn(
-                "flex items-center gap-3 border-border px-4 py-3",
-                index < profileMeta.length - 2 ? "border-b" : "",
-                index % 2 === 0 ? "sm:border-r" : "",
+                "flex items-center gap-3 border border-border bg-card px-4 py-3",
+                item.action === "resume" &&
+                  "cursor-pointer transition-colors hover:border-primary/40 hover:text-primary",
               )}
+              onClick={
+                item.action === "resume"
+                  ? () => setResumeOpen(true)
+                  : undefined
+              }
             >
               <span className="min-w-14 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-muted-foreground">
                 {item.label}
@@ -91,12 +115,18 @@ export function HeroSection() {
                     item.accent
                       ? "inline-flex items-center gap-2 text-primary"
                       : "",
+                    item.action === "resume"
+                      ? "inline-flex items-center gap-2"
+                      : "",
                   )}
                 >
                   {item.accent ? (
                     <span className="portfolio-pulse-dot" />
                   ) : null}
                   {item.value}
+                  {item.action === "resume" ? (
+                    <ArrowUpRightIcon className="size-3.5 text-muted-foreground" />
+                  ) : null}
                 </span>
               )}
             </div>
@@ -142,6 +172,45 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Resume Dialog */}
+      <Dialog
+        open={resumeOpen}
+        onOpenChange={(open) => {
+          if (!open) setResumeOpen(false);
+        }}
+      >
+        <DialogContent className="w-[95vw] sm:max-w-3xl max-h-[90vh] p-4 sm:p-6 flex flex-col">
+          <DialogHeader>
+            <DialogTitle>Resume</DialogTitle>
+            <DialogDescription>
+              Jomar Maestro · Full-Stack Web Developer
+            </DialogDescription>
+          </DialogHeader>
+          <div className="overflow-auto flex-1 min-h-0">
+            <Image
+              src={RESUME_IMG}
+              alt="Resume — Jomar Maestro"
+              width={1200}
+              height={1600}
+              className="w-full h-auto rounded-sm"
+            />
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              size="sm"
+              nativeButton={false}
+              render={
+                <a href={RESUME_PDF} download="Resume_Jomar_Maestro.pdf" />
+              }
+            >
+              <DownloadIcon />
+              Download PDF
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
