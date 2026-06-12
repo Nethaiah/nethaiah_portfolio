@@ -3,11 +3,11 @@ import {
   renderContactEmailHtml,
 } from "@/components/email-template";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { contactSubjectByPurpose, type ContactPurpose } from "@/lib/contact";
 import {
-  contactSubjectByPurpose,
-  isContactPurpose,
-  type ContactPurpose,
-} from "@/lib/contact";
+  contactFormSchema,
+  type ContactFormValues,
+} from "@/lib/contact-schema";
 import { Resend } from "resend";
 
 type ContactRow = {
@@ -34,19 +34,6 @@ type ValidationResult =
 const ownerEmail = process.env.CONTACT_TO_EMAIL || "maestrojomar143@gmail.com";
 const fromEmail =
   process.env.RESEND_FROM_EMAIL || "Nethaiah <noreply@nethaiah.online>";
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
-
-function text(payload: Record<string, unknown>, key: string, maxLength = 5000) {
-  const value = payload[key];
-
-  if (typeof value !== "string") {
-    return "";
-  }
-
-  return value.trim().slice(0, maxLength);
-}
 
 function optional(value: string) {
   return value.length > 0 ? value : null;
@@ -77,24 +64,20 @@ function appendField(
   fields.push({ label, value });
 }
 
-function validatePayload(payload: Record<string, unknown>): ValidationResult {
-  const purpose = payload.purpose;
+function validatePayload(payload: unknown): ValidationResult {
+  const parsed = contactFormSchema.safeParse(payload);
 
-  if (!isContactPurpose(purpose)) {
-    return { error: "Select a valid purpose." };
+  if (!parsed.success) {
+    return {
+      error: parsed.error.issues[0]?.message || "Invalid contact submission.",
+    };
   }
 
-  const isAnonymous = purpose === "Feedback" && payload.is_anonymous === true;
-  const email = text(payload, "email", 320).toLowerCase();
-  const username = text(payload, "username", 120);
-
-  if (!isAnonymous && !email) {
-    return { error: "Email is required." };
-  }
-
-  if (email && !emailPattern.test(email)) {
-    return { error: "Enter a valid email address." };
-  }
+  const values: ContactFormValues = parsed.data;
+  const purpose = values.purpose;
+  const isAnonymous = purpose === "Feedback" && values.is_anonymous === true;
+  const email = values.email.trim().toLowerCase();
+  const username = values.username.trim();
 
   const row: ContactRow = {
     purpose,
@@ -108,48 +91,17 @@ function validatePayload(payload: Record<string, unknown>): ValidationResult {
   };
 
   if (purpose === "Schedule a Call") {
-    const preferredDate = text(payload, "preferred_date", 10);
-    const preferredTime = text(payload, "preferred_time", 5);
-
-    if (!preferredDate) {
-      return { error: "Preferred date is required." };
-    }
-
-    if (!datePattern.test(preferredDate)) {
-      return { error: "Preferred date must use YYYY-MM-DD format." };
-    }
-
-    if (!preferredTime) {
-      return { error: "Preferred time is required." };
-    }
-
-    if (!timePattern.test(preferredTime)) {
-      return { error: "Preferred time must use HH:MM format." };
-    }
-
-    row.preferred_date = preferredDate;
-    row.preferred_time = preferredTime;
-    row.additional_notes = optional(text(payload, "additional_notes"));
+    row.preferred_date = values.preferred_date.trim();
+    row.preferred_time = values.preferred_time.trim();
+    row.additional_notes = optional(values.additional_notes.trim());
   }
 
   if (purpose === "Collaboration") {
-    const message = text(payload, "message");
-
-    if (!message) {
-      return { error: "Collaboration details are required." };
-    }
-
-    row.message = message;
+    row.message = values.message.trim();
   }
 
   if (purpose === "Feedback") {
-    const message = text(payload, "message");
-
-    if (!message) {
-      return { error: "Feedback message is required." };
-    }
-
-    row.message = message;
+    row.message = values.message.trim();
   }
 
   const fields: ContactEmailField[] = [];
@@ -196,7 +148,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const validated = validatePayload(payload as Record<string, unknown>);
+  const validated = validatePayload(payload);
 
   if ("error" in validated) {
     return Response.json(

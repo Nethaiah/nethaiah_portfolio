@@ -35,11 +35,15 @@ type TerminalCommand = {
 };
 
 const terminalCommands: TerminalCommand[] = [
-  { command: "/help", description: "Show all commands" },
-  { command: "/about", description: "Profile summary" },
-  { command: "/skills", description: "Core stack and tools" },
-  { command: "/projects", description: "Featured work" },
-  { command: "/contact", description: "Ways to reach Jomar" },
+  { command: "/help", description: "Show command guide" },
+  { command: "/about", description: "Profile and focus" },
+  { command: "/skills", description: "Core stack by category" },
+  { command: "/projects", description: "Featured work summary" },
+  { command: "/experience", description: "Internship and freelance history" },
+  { command: "/education", description: "Degree and coursework" },
+  { command: "/certs", description: "Certifications and awards" },
+  { command: "/availability", description: "Work status and next step" },
+  { command: "/contact", description: "Email and social links" },
   { command: "/github", description: "GitHub profile" },
   { command: "/clear", description: "Reset the terminal" },
 ];
@@ -54,40 +58,78 @@ const initialMessages: TerminalMessage[] = [
     id: 2,
     role: "assistant",
     content: [
-      "Ask about Jomar's skills, projects, contact links, or availability.",
-      "Type /help to see available commands.",
+      "Ask about Jomar's skills, projects, experience, education, contact links, or availability.",
+      "Use /help for commands, or type a normal question for a fuller AI answer.",
     ],
   },
 ];
 
 const commandReplies: Record<string, string[]> = {
   "/about": [
-    "Jomar Maestro, also known as nethaiah, is a full-stack web developer based in Laguna, Philippines.",
-    "Focus areas: web apps, portfolio systems, and AI-assisted product workflows.",
+    "Jomar Dela Cruz Maestro, also known as Nethaiah, is a full-stack web developer from Laguna, Philippines.",
+    "Headline: Full-Stack Web Developer focused on AI-enabled applications.",
+    "He builds secure, scalable web apps with Next.js, PostgreSQL, Supabase, and AI integrations.",
+    "Current status: open to work.",
+  ],
+  "/availability": [
+    "Status: open to work.",
+    "Best fit: full-stack web development, AI-enabled apps, portfolio/product systems, and data-backed tools.",
+    "Best next step: email maestrojomar143@gmail.com or connect on LinkedIn.",
+  ],
+  "/certs": [
+    "Certifications include AWS Cloud Practitioner CLF-C02 plus AWS cloud, security, cost, and services courses from DataCamp.",
+    "Also listed: Coursera intro courses for cloud computing, HTML/CSS/JavaScript, software engineering, IBM software engineering, and IBM cloud computing.",
+    "Awards include Certificate of Recognition for STARS deployment, Best Thesis (CCS), and Best Research Presenter (Institutional).",
   ],
   "/contact": [
     "Email: maestrojomar143@gmail.com",
     "GitHub: https://github.com/Nethaiah",
     "LinkedIn: https://www.linkedin.com/in/maestro-jomar-d-134876330/",
     "X / Twitter: https://x.com/Nethaiah_",
+    "Use email or LinkedIn for hiring, collaboration, and project inquiries.",
+  ],
+  "/education": [
+    "School: Laguna University.",
+    "Degree: BS Computer Science with specialization in Data Science.",
+    "Timeline: Aug 2021 - June 2026.",
+    "Relevant coursework: Software Engineering, AI, Information Management, Machine Learning, and DBMS.",
+  ],
+  "/experience": [
+    "Laguna MISO IT Intern, Feb 2026 - April 2026: worked on STARS, an Android OMR scanning and class record system.",
+    "Ship or Be Shipped Hackathon, Dec 2025: built MedAssist with Next.js, Supabase, OpenFDA, and Google Gemini.",
+    "Freelance Full-Stack Developer, July 2025 - Aug 2025: worked on RPTAS with Next.js, PostgreSQL, Prisma, and role-based auth.",
   ],
   "/github": ["GitHub profile: https://github.com/Nethaiah"],
   "/help": [
     "Available commands:",
-    "/about     profile summary",
-    "/skills    core stack and tools",
-    "/projects  featured work",
-    "/contact   ways to reach Jomar",
-    "/github    GitHub profile",
-    "/clear     reset the terminal",
+    "/about        profile and current focus",
+    "/skills       stack grouped by frontend, backend, database, AI, and tooling",
+    "/projects     featured projects with outcomes",
+    "/experience   internship, hackathon, and freelance history",
+    "/education    degree, school, and coursework",
+    "/certs        certifications and awards",
+    "/availability open-to-work status and next step",
+    "/contact      email and social links",
+    "/github       GitHub profile",
+    "/clear        reset the terminal",
+    "Tip: normal questions use the AI assistant for more detailed answers.",
   ],
   "/projects": [
-    "The projects section below contains the current featured work.",
-    "Try scrolling to Projects, or ask: show projects.",
+    "Featured work:",
+    "Nethaiah Portfolio: Next.js portfolio with terminal assistant, Supabase contact storage, and Resend notifications.",
+    "Doculens: semantic theses search for Laguna University with Next.js, FastAPI, Supabase, pgvector, BM25, and RAG Q&A.",
+    "STARS: Android OMR scanner using Java, CameraX, OpenCV, Room, and local class record workflows.",
+    "MedAssist: AI treatment plan assistant with Next.js, Supabase, Google GenAI, OpenFDA, Zod, and email reminders.",
+    "Wattify and VideoNotes AI: ML energy forecasting and YouTube-to-study-notes workflows.",
+    "Ask a project name for a deeper breakdown.",
   ],
   "/skills": [
-    "Core stack: Next.js, React, TypeScript, Tailwind CSS, and full-stack web development.",
-    "Current portfolio also uses shadcn/ui, Base UI, Motion, and GitHub contribution data.",
+    "Languages: TypeScript, JavaScript, Python, PHP, and SQL.",
+    "Frontend: React, Next.js, Tailwind CSS, shadcn/ui, Base UI, HTML, and CSS.",
+    "Backend/API: Node.js, Hono, FastAPI, Laravel, Django, REST APIs, and Zod validation.",
+    "Data: PostgreSQL, MySQL, Supabase, Neon, Firebase, Drizzle ORM, and Pinecone.",
+    "AI/ML: LLM integration, vector search, NLP, web scraping, OpenRouter, Hugging Face, Gemini, XGBoost, and SARIMAX.",
+    "Workflow: Git/GitHub, Vercel, Railway, Google Cloud Platform, Resend, Postman, TablePlus, Agile, and Biome.",
   ],
 };
 
@@ -106,6 +148,18 @@ function getTerminalReply(input: string) {
     return commandReplies["/skills"];
   }
 
+  if (
+    normalized === "/certifications" ||
+    normalized === "/certificates" ||
+    normalized === "/awards"
+  ) {
+    return commandReplies["/certs"];
+  }
+
+  if (normalized === "/available" || normalized === "/status") {
+    return commandReplies["/availability"];
+  }
+
   if (commandReplies[normalized]) {
     return commandReplies[normalized];
   }
@@ -114,7 +168,45 @@ function getTerminalReply(input: string) {
     return commandReplies["/skills"];
   }
 
-  if (normalized.includes("project") || normalized.includes("work")) {
+  if (
+    normalized.includes("available") ||
+    normalized.includes("open to work") ||
+    normalized.includes("availability")
+  ) {
+    return commandReplies["/availability"];
+  }
+
+  if (
+    normalized.includes("experience") ||
+    normalized.includes("intern") ||
+    normalized.includes("freelance") ||
+    normalized.includes("hackathon")
+  ) {
+    return commandReplies["/experience"];
+  }
+
+  if (
+    normalized.includes("education") ||
+    normalized.includes("school") ||
+    normalized.includes("degree") ||
+    normalized.includes("coursework")
+  ) {
+    return commandReplies["/education"];
+  }
+
+  if (
+    normalized.includes("cert") ||
+    normalized.includes("award") ||
+    normalized.includes("recognition")
+  ) {
+    return commandReplies["/certs"];
+  }
+
+  if (
+    normalized.includes("project") ||
+    normalized.includes("featured work") ||
+    normalized.includes("portfolio")
+  ) {
     return commandReplies["/projects"];
   }
 
@@ -140,20 +232,16 @@ function getTerminalReply(input: string) {
     return commandReplies["/github"];
   }
 
-  if (
-    normalized.includes("available") ||
-    normalized.includes("open to work") ||
-    normalized.includes("availability")
-  ) {
+  if (normalized.startsWith("/")) {
     return [
-      "Status: open to work.",
-      "Best next step: send an email to maestrojomar143@gmail.com.",
+      `Unknown command: ${input.trim()}`,
+      "Try /help for the full command list.",
     ];
   }
 
   return [
-    `No local rule matched "${input.trim()}".`,
-    "Try /help, /skills, /projects, /about, or /contact.",
+    "No local fallback matched that question.",
+    "Try /help, or ask again while the AI assistant is available.",
   ];
 }
 

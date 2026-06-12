@@ -11,7 +11,6 @@ import {
 import * as React from "react";
 import { Controller, type Resolver, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -48,91 +47,16 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { contactPurposes, type ContactPurpose } from "@/lib/contact";
+import {
+  contactFormDefaultValues,
+  contactFormSchema,
+  type ContactFormValues,
+} from "@/lib/contact-schema";
 
-const contactFormSchema = z
-  .object({
-    purpose: z.enum(contactPurposes, {
-      message: "Purpose is required.",
-    }),
-    email: z.string(),
-    username: z.string(),
-    preferred_date: z.string(),
-    preferred_time: z.string(),
-    additional_notes: z.string(),
-    message: z.string(),
-    is_anonymous: z.boolean(),
-  })
-  .superRefine((values, context) => {
-    const anonymousFeedback =
-      values.purpose === "Feedback" && values.is_anonymous === true;
-
-    if (!anonymousFeedback) {
-      if (!values.email.trim()) {
-        context.addIssue({
-          code: "custom",
-          message: "Email is required.",
-          path: ["email"],
-        });
-      } else if (!z.email().safeParse(values.email.trim()).success) {
-        context.addIssue({
-          code: "custom",
-          message: "Enter a valid email address.",
-          path: ["email"],
-        });
-      }
-    }
-
-    if (values.purpose === "Schedule a Call") {
-      if (!values.preferred_date.trim()) {
-        context.addIssue({
-          code: "custom",
-          message: "Preferred date is required.",
-          path: ["preferred_date"],
-        });
-      }
-
-      if (!values.preferred_time.trim()) {
-        context.addIssue({
-          code: "custom",
-          message: "Preferred time is required.",
-          path: ["preferred_time"],
-        });
-      }
-    }
-
-    if (values.purpose === "Collaboration" && !values.message.trim()) {
-      context.addIssue({
-        code: "custom",
-        message: "Collaboration details are required.",
-        path: ["message"],
-      });
-    }
-
-    if (values.purpose === "Feedback" && !values.message.trim()) {
-      context.addIssue({
-        code: "custom",
-        message: "Feedback message is required.",
-        path: ["message"],
-      });
-    }
-  });
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
 type TextFieldName = Exclude<keyof ContactFormValues, "is_anonymous">;
 const resolveContactForm = zodResolver as unknown as (
   schema: typeof contactFormSchema,
 ) => Resolver<ContactFormValues>;
-
-const defaultValues: ContactFormValues = {
-  purpose: "Schedule a Call",
-  email: "",
-  username: "",
-  preferred_date: "",
-  preferred_time: "12:00",
-  additional_notes: "",
-  message: "",
-  is_anonymous: false,
-};
 
 function getDateFromValue(value: string) {
   const [year, month, day] = value.split("-").map(Number);
@@ -170,10 +94,7 @@ function buildPayload(values: ContactFormValues) {
     payload.additional_notes = values.additional_notes.trim();
   }
 
-  if (
-    values.purpose === "Collaboration" ||
-    values.purpose === "Feedback"
-  ) {
+  if (values.purpose === "Collaboration" || values.purpose === "Feedback") {
     payload.message = values.message.trim();
   }
 
@@ -184,7 +105,7 @@ export function LetsTalkModal() {
   const [open, setOpen] = React.useState(false);
   const form = useForm<ContactFormValues>({
     resolver: resolveContactForm(contactFormSchema),
-    defaultValues,
+    defaultValues: contactFormDefaultValues,
     mode: "onSubmit",
   });
   const purpose = form.watch("purpose");
@@ -213,7 +134,7 @@ export function LetsTalkModal() {
       }
 
       toast.success("Message sent.");
-      form.reset(defaultValues);
+      form.reset(contactFormDefaultValues);
       setOpen(false);
     } catch (error) {
       toast.error(
@@ -281,10 +202,7 @@ export function LetsTalkModal() {
             return (
               <Field data-invalid={fieldState.invalid || timeState.invalid}>
                 <FieldLabel htmlFor={field.name}>Date and Time</FieldLabel>
-                <Popover
-                  open={datePickerOpen}
-                  onOpenChange={setDatePickerOpen}
-                >
+                <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
                   <PopoverTrigger
                     render={
                       <Button
