@@ -114,7 +114,7 @@ export function ContactSection() {
         {/* X / Twitter */}
         <a
           href="https://x.com/Nethaiah_"
-          className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary sm:col-span-2"
+          className="group flex items-center gap-4 border border-border bg-card px-4 py-4 transition-colors hover:border-primary/40 hover:text-primary"
         >
           <span className="flex size-9 items-center justify-center border border-border bg-muted text-foreground">
             𝕏
